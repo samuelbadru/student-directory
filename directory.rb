@@ -1,3 +1,5 @@
+student_count = 11
+
 # Student names are printed, each on a new line
 puts "The students of Villains Academy"
 puts "-------------"
@@ -14,8 +16,4 @@ puts "Joffrey Baratheon"
 puts "Norman Bates"
 
 # The sum total of students is then printed
-print "Overall, we have "
-# print keeps string on the same line
-print 11
-# puts at the end so the command prompt after starts on a new line
-puts " great students"
+puts "Overall, we have #{student_count} great students"
