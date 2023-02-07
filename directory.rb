@@ -51,15 +51,22 @@ def search_initials(students)
                 results << "#{i + 1} #{student[:name]} (#{student[:cohort]} cohort)"
             end
         end
-        if results.empty?
+        
+        if initials.empty?
+            break
+        elsif results.empty?
             puts "No match found!"
         else
             results.each do |result|
                 puts result
             end
-            break
         end
+
     end
+end
+
+def search_length(students)
+    puts "Enter the initials for the student you are looking for"
 end
 
 # Calling methods
