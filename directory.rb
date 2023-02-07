@@ -1,19 +1,35 @@
 # Method to create the students array
 def input_students
     
-    puts "Please enter the first and last names of the students"
-    puts "To finish, hit return twice"
+    puts "Please enter the students' information"
+    
     # Empty array
     students = []
-    # Gets first name
-    name = gets.chomp
+    i = 1
     
-    while !name.empty? do
-        # add student hash to the students array
-        students << {name: name, cohort: :november}
-        puts "Now we have #{students.count} students"
-        # get another name from the user
+    while true
+        puts "Enter the first and last names of student #{i} or hit return to exit"
         name = gets.chomp
+        if name.empty?
+            break
+        end
+        puts "Enter the age of #{name}"
+        age = gets.chomp
+        puts "Enter the cohort of #{name}"
+        cohort = gets.chomp
+        puts "Enter the country of birth of #{name}"
+        birth = gets.chomp
+        puts "Enter the height of #{name} in cm"
+        height = gets.chomp
+        puts "Enter the hobbies of #{name}"
+        hobbies = gets.chomp
+        
+        # add student hash to the students array
+        students << {name: name, age: age, cohort: cohort, birth: birth, 
+        height: height, hobbies: hobbies}
+        puts "Now we have #{students.count} students"
+        
+        i += 1
     end
     # implicitly returns the students array
     students
@@ -29,7 +45,7 @@ end
 def print(students)
     i = 0
     while i < students.length
-        puts "#{i + 1}. #{students[i][:name]} (#{students[i][:cohort]} cohort)"
+        puts "#{i + 1}. #{students[i][:name]} (Age: #{students[i][:age]}, Cohort: #{students[i][:cohort]}, Birth Country: #{students[i][:birth]}, Height: #{students[i][:height]}, Hobbies: #{students[i][:hobbies]})"
         i += 1
     end
 end
@@ -51,7 +67,7 @@ def search_initials(students)
         students.each_with_index do |student, i|
             names = student[:name].upcase.split()
             if initials == "#{names[0][0]}#{names[1][0]}"
-                results << "#{i + 1}. #{student[:name]} (#{student[:cohort]} cohort)"
+                results << "#{i + 1}. #{students[i][:name]} (Age: #{students[i][:age]}, Cohort: #{students[i][:cohort]}, Birth Country: #{students[i][:birth]}, Height: #{students[i][:height]}, Hobbies: #{students[i][:hobbies]})"
             end
         end
         
@@ -78,7 +94,7 @@ def search_length(students)
         
         students.each_with_index do |student, i|
             if student[:name].length <= length.to_i
-                results << "#{i}. #{student[:name]} (#{student[:cohort]})"
+                results << "#{i + 1}. #{students[i][:name]} (Age: #{students[i][:age]}, Cohort: #{students[i][:cohort]}, Birth Country: #{students[i][:birth]}, Height: #{students[i][:height]}, Hobbies: #{students[i][:hobbies]})"
             end
         end
         
@@ -96,9 +112,9 @@ end
 
 # Calling methods
 
-#students = input_students
-#print_header
-#print(students)
-#print_footer(students)
+students = input_students
+print_header
+print(students)
+print_footer(students)
 #search_initials(students)
 #search_length(students)
