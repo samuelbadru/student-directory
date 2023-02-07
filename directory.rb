@@ -1,16 +1,16 @@
 # Array containing the names of the students
 students = [
-    ["Dr. Hannibal Lecter", :november],
-    ["Darth Vader", :november],
-    ["Nurse Vader", :november],
-    ["Michael Corleone", :november],
-    ["Alex DeLarge", :november],
-    ["The Wicked Witch of the West", :november],
-    ["Terminator", :november],
-    ["Freddy Krueger", :november],
-    ["The Joker", :november],
-    ["Joffrey Baratheon", :november],
-    ["Norman Bates", :november]
+    {name: "Dr. Hannibal Lecter", cohort: :november},
+    {name: "Darth Vader", cohort: :november},
+    {name: "Nurse Vader", cohort: :november},
+    {name: "Michael Corleone", cohort: :november},
+    {name: "Alex DeLarge", cohort: :november},
+    {name: "The Wicked Witch of the West", cohort: :november},
+    {name: "Terminator", cohort: :november},
+    {name: "Freddy Krueger", cohort: :november},
+    {name: "The Joker", cohort: :november},
+    {name: "Joffrey Baratheon", cohort: :november},
+    {name: "Norman Bates", cohort: :november}
     ]
 
 # Method to print header
