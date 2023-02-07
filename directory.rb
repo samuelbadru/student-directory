@@ -39,12 +39,25 @@ end
 
 # Method to search for a user given their initials
 def search_initials(students)
-    puts "Enter the initials for the student you are looking for"
-    initials = gets.chomp.upcase
-    students.each_with_index do |student, i|
-        names = student[:name].upcase.split()
-        if initials == "#{names[0][0]}#{names[1][0]}"
-            puts "#{i + 1} #{student[:name]} (#{student[:cohort]} cohort)"
+    
+    while true
+        puts "Enter the initials for the student you are looking for"
+        puts "To finish, hit return twice"
+        results = []
+        initials = gets.chomp.upcase
+        students.each_with_index do |student, i|
+            names = student[:name].upcase.split()
+            if initials == "#{names[0][0]}#{names[1][0]}"
+                results << "#{i + 1} #{student[:name]} (#{student[:cohort]} cohort)"
+            end
+        end
+        if results.empty?
+            puts "No match found!"
+        else
+            results.each do |result|
+                puts result
+            end
+            break
         end
     end
 end
