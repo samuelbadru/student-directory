@@ -27,8 +27,10 @@ end
 
 # Method to print names and cohort month in a given nested array
 def print(students)
-    students.each_with_index do |student, i|
-        puts "#{i + 1}. #{student[:name]} (#{student[:cohort]} cohort)"
+    i = 0
+    while i < students.length
+        puts "#{i + 1}. #{students[i][:name]} (#{students[i][:cohort]} cohort)"
+        i += 1
     end
 end
 
@@ -45,6 +47,7 @@ def search_initials(students)
         puts "To finish, hit return twice"
         results = []
         initials = gets.chomp.upcase
+        
         students.each_with_index do |student, i|
             names = student[:name].upcase.split()
             if initials == "#{names[0][0]}#{names[1][0]}"
@@ -73,7 +76,6 @@ def search_length(students)
         results = []
         length = gets.chomp
         
-        
         students.each_with_index do |student, i|
             if student[:name].length <= length.to_i
                 results << "#{i}. #{student[:name]} (#{student[:cohort]})"
@@ -93,9 +95,10 @@ def search_length(students)
 end
 
 # Calling methods
-students = input_students
-print_header
-print(students)
-print_footer(students)
-search_initials(students)
-search_length(students)
+
+#students = input_students
+#print_header
+#print(students)
+#print_footer(students)
+#search_initials(students)
+#search_length(students)
