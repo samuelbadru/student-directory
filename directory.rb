@@ -1,7 +1,7 @@
 # Method to create the students array
 def input_students
     
-    puts "Please enter the name of the students"
+    puts "Please enter the first and last names of the students"
     puts "To finish, hit return twice"
     # Empty array
     students = []
@@ -37,8 +37,21 @@ def print_footer(students)
     puts "Overall, we have #{students.count} great students"
 end
 
+# Method to search for a user given their initials
+def search_initials(students)
+    puts "Enter the initials for the student you are looking for"
+    initials = gets.chomp.upcase
+    students.each_with_index do |student, i|
+        names = student[:name].upcase.split()
+        if initials == "#{names[0][0]}#{names[1][0]}"
+            puts "#{i + 1} #{student[:name]} (#{student[:cohort]} cohort)"
+        end
+    end
+end
+
 # Calling methods
 students = input_students
 print_header
 print(students)
 print_footer(students)
+search_initials(students)
