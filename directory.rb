@@ -19,16 +19,16 @@ def print_header
     puts "-------------"
 end
 
-# Method to print names in a given array
-def print(names)
-    names.each do |name|
-        puts name
+# Method to print names and cohort month in a given nested array
+def print(students)
+    students.each do |student|
+        puts "#{student[0]} (#{student[1]} cohort)"
     end
 end
 
 # Method to print the footer, which contains the count of the given array
-def print_footer(names)
-    puts "Overall, we have #{names.count} great students"
+def print_footer(students)
+    puts "Overall, we have #{students.count} great students"
 end
 
 # Calling methods
