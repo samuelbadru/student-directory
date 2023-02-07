@@ -1,16 +1,16 @@
 # Array containing the names of the students
 students = [
-    "Dr. Hannibal Lecter",
-    "Darth Vader",
-    "Nurse Vader",
-    "Michael Corleone",
-    "Alex DeLarge",
-    "The Wicked Witch of the West",
-    "Terminator",
-    "Freddy Krueger",
-    "The Joker",
-    "Joffrey Baratheon",
-    "Norman Bates"
+    ["Dr. Hannibal Lecter", :november],
+    ["Darth Vader", :november],
+    ["Nurse Vader", :november],
+    ["Michael Corleone", :november],
+    ["Alex DeLarge", :november],
+    ["The Wicked Witch of the West", :november],
+    ["Terminator", :november],
+    ["Freddy Krueger", :november],
+    ["The Joker", :november],
+    ["Joffrey Baratheon", :november],
+    ["Norman Bates", :november]
     ]
 
 # Method to print header
