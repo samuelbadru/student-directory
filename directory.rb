@@ -21,8 +21,8 @@ end
 
 # Method to print names and cohort month in a given nested array
 def print(students)
-    students.each do |student|
-        puts "#{student[0]} (#{student[1]} cohort)"
+    students.each do |name, cohort|
+        puts "#{name} (#{cohort} cohort)"
     end
 end
 
