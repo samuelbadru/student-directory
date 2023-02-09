@@ -1,3 +1,29 @@
+# Method to ask and execute what the user wants to do
+def interactive_menu
+    students = []
+    loop do
+    puts "1. Input student information"
+    puts "2. Display all students' information"
+    puts "3. Search for a student's information using their initals"
+    puts "4. Search for student information based on name length"
+    puts "5. Fix a typo"
+    puts "9. Exit"
+    
+    selection = gets.chomp
+    
+    case selection
+        when "1" then students = input_students
+        when "2" then print_header ; print(students) ; print_footer(students)
+        when "3" then search_initials(students)
+        when "4" then search_length(students)
+        when "5" then fix_typo(students)
+        when "9" then puts "Goodbye" ; return
+        else puts "I don't know what you meant, try again" 
+    end
+    end
+end
+
+
 # Method to create the students array
 def input_students
     
@@ -11,8 +37,7 @@ def input_students
         puts "Enter the first and last names of student #{i} or hit return to exit"
         name = gets.chomp
         if name.empty?
-            puts "Goodbye!"
-            break
+            return students
         end
         
         puts "Enter the age of #{name}"
@@ -46,14 +71,14 @@ def input_students
         end
         
         # add student hash to the students array
-        students << {name: name, age: age, cohort: cohort.to_sym, birth: birth, 
+        students << {name: name, age: age, cohort: cohort, birth: birth, 
         height: height, hobbies: hobbies}
         puts "Now we have #{students.count} students"
         
         i += 1
     end
     # implicitly returns the students array
-    students
+    
 end
 
 # Method to print header
@@ -93,8 +118,7 @@ def search_initials(students)
         
         # If user hits return when prompted, then method concludes
         if initials.empty?
-            puts "Goodbye!"
-            break
+            return
         elsif results.empty?
             puts "No match found!"
         else
@@ -119,8 +143,7 @@ def search_length(students)
         end
         
         if length.empty?
-            puts "Goodbye!"
-            break
+            return
         elsif results.empty?
             puts "No match found!"
         else
@@ -138,8 +161,7 @@ def fix_typo(students)
         x = 0
         
         if name.empty?
-            puts "Goodbye!"
-            break
+            return
         end
         
         students.each do |student|
@@ -175,13 +197,5 @@ def fix_typo(students)
         
     end
 end
-# Calling methods
 
-students = input_students
-
-print_header
-print(students)
-print_footer(students)
-#search_initials(students)
-#search_length(students)
-fix_typo(students)
+interactive_menu
