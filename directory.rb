@@ -6,6 +6,7 @@ def print_menu
     puts "3. Search for a student's information using their initals"
     puts "4. Search for student information based on name length"
     puts "5. Fix a typo"
+    puts "7. Load the list from students.csv"
     puts "8. Save the list to students.csv"
     puts "9. Exit"
 end
@@ -25,6 +26,7 @@ def process(selection)
         when "3" then search_initials
         when "4" then search_length
         when "5" then fix_typo
+        when "7" then load_students
         when "8" then save_students
         when "9" then puts "Goodbye" ; exit
         else puts "I don't know what you meant, try again" 
@@ -98,6 +100,16 @@ def save_students
     end
     file.close
     puts "Saved!"
+end
+
+def load_students
+    file = File.open("students.csv", "r")
+    file.readlines.each do |line|
+        name, age, cohort, birth, height, hobbies = line.chomp.split(",")
+        @students << {name: name, age: age, cohort: cohort, birth: birth, height: height, hobbies: hobbies}
+    end
+    file.close
+    puts "Loaded!"
 end
 
 
