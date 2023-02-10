@@ -6,16 +6,15 @@ def print_menu
     puts "3. Search for a student's information using their initals"
     puts "4. Search for student information based on name length"
     puts "5. Fix a typo"
+    puts "8. Save the list to students.csv"
     puts "9. Exit"
 end
 
 
 def interactive_menu
     loop do
-    
-    selection = gets.chomp
+    print_menu
     process(gets.chomp)
-    
     end
 end
 
@@ -26,7 +25,8 @@ def process(selection)
         when "3" then search_initials
         when "4" then search_length
         when "5" then fix_typo
-        when "9" then puts "Goodbye" ; return
+        when "8" then save_students
+        when "9" then puts "Goodbye" ; exit
         else puts "I don't know what you meant, try again" 
     end
 end
@@ -87,6 +87,19 @@ def input_students
         i += 1
     end
 end
+
+def save_students
+    file = File.open("students.csv", "w")
+    
+    @students.each do |student|
+        student_data = [student[:name], student[:age], student[:cohort], student[:birth], student[:height], student[:hobbies]]
+        csv_line = student_data.join(",")
+        file.puts csv_line
+    end
+    file.close
+    puts "Saved!"
+end
+
 
 # Method to print header
 def print_header
@@ -194,7 +207,6 @@ def fix_typo
         puts "Enter your correction"
         fix = gets.chomp
         
-        # Not recognising category, even when correct
         @students.each_with_index do |student, i|
             if student[:name] == name
                 student[cat] = fix
