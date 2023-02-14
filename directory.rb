@@ -35,7 +35,11 @@ end
 
 
 def show_students
-    print_header ; print_students ; print_footer
+    if @students.empty?
+        puts "No students to display!"
+    else
+        print_header ; print_students ; print_footer
+    end
 end
 
 # Method to create the students array
