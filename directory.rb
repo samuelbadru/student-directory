@@ -15,7 +15,7 @@ end
 def interactive_menu
     loop do
     print_menu
-    process(gets.chomp)
+    process(STDIN.gets.chomp)
     end
 end
 
@@ -46,37 +46,37 @@ def input_students
     
     while true
         puts "Enter the first and last names of student #{i} or hit return to exit"
-        name = gets.chomp
+        name = STDIN.gets.chomp
         if name.empty?
             return
         end
         
         puts "Enter the age of #{name}"
-        age = gets.chomp
+        age = STDIN.gets.chomp
         if age.empty?
             age = "N/A"
         end
         
         puts "Enter the cohort of #{name}"
-        cohort = gets.chomp
+        cohort = STDIN.gets.chomp
         if cohort.empty?
             cohort = "N/A"
         end
         
         puts "Enter the country of birth of #{name}"
-        birth = gets.chomp
+        birth = STDIN.gets.chomp
         if birth.empty?
             birth = "N/A"
         end
         
         puts "Enter the height of #{name} in cm"
-        height = gets.chomp
+        height = STDIN.gets.chomp
         if height.empty?
             height = "N/A"
         end
         
         puts "Enter the hobbies of #{name}"
-        hobbies = gets.chomp
+        hobbies = STDIN.gets.chomp
         if hobbies.empty?
             hobbies = "N/A"
         end
@@ -84,7 +84,12 @@ def input_students
         # add student hash to the students array
         @students << {name: name, age: age, cohort: cohort, birth: birth, 
         height: height, hobbies: hobbies}
-        puts "Now we have #{@students.count} students"
+        
+        if i == 1
+            puts "Now we have 1 student"
+        else
+            puts "Now we have #{@students.count} students"
+        end
         
         i += 1
     end
@@ -102,14 +107,26 @@ def save_students
     puts "Saved!"
 end
 
-def load_students
-    file = File.open("students.csv", "r")
+def load_students(filename = "students.csv")
+    file = File.open(filename, "r")
     file.readlines.each do |line|
         name, age, cohort, birth, height, hobbies = line.chomp.split(",")
         @students << {name: name, age: age, cohort: cohort, birth: birth, height: height, hobbies: hobbies}
     end
     file.close
-    puts "Loaded!"
+    puts "Loaded #{@students.count} from #{filename}"
+end
+
+
+def try_load_students
+    filename = ARGV.first
+    return if filename.nil?
+    if File.exist?(filename)
+        load_students(filename)
+    else
+        puts "Sorry, #{filename} doesn't exist."
+        exit
+    end
 end
 
 
@@ -130,7 +147,11 @@ end
 
 # Method to print the footer, which contains the count of the given array
 def print_footer
-    puts "Overall, we have #{@students.count} great students"
+    if @students.count == 1
+        puts "Overall, we have 1 great student"
+    else
+        puts "Overall, we have #{@students.count} great students"
+    end
 end
 
 # Method to search for a user given their initials
@@ -139,7 +160,7 @@ def search_initials
     while true
         puts "Enter the initials for the student you are looking for or hit return to exit"
         results = []
-        initials = gets.chomp.upcase
+        initials = STDIN.gets.chomp.upcase
         
         @students.each_with_index do |student, i|
             names = student[:name].upcase.split()
@@ -166,7 +187,7 @@ def search_length
     while true
         puts "Enter the max character length of the name or hit return to exit"
         results = []
-        length = gets.chomp
+        length = STDIN.gets.chomp
         
         @students.each_with_index do |student, i|
             if student[:name].length <= length.to_i
@@ -189,7 +210,7 @@ end
 def fix_typo
     while true
         puts "Enter the name of the student you wish to edit or hit return to exit"
-        name = gets.chomp
+        name = STDIN.gets.chomp
         x = 0
         
         if name.empty?
@@ -209,7 +230,7 @@ def fix_typo
             
         
         puts "Enter the category you wish to edit"
-        cat = gets.chomp.downcase.to_sym
+        cat = STDIN.gets.chomp.downcase.to_sym
         
         if !@students[0].key?(cat)
             puts "Incorrect category"
@@ -217,7 +238,7 @@ def fix_typo
         end
         
         puts "Enter your correction"
-        fix = gets.chomp
+        fix = STDIN.gets.chomp
         
         @students.each_with_index do |student, i|
             if student[:name] == name
@@ -229,4 +250,5 @@ def fix_typo
     end
 end
 
+try_load_students
 interactive_menu
